@@ -25,6 +25,26 @@
         
         .father{
             display: grid;
+            grid-template-columns: repeat(3 1fr);
+            grid-template-rows: repeat(4, 200px);
+            grid-gap: 20px;
+            grid-template-areas: "header header header"
+                                 "content content sidebar"
+                                 "content content sidebar"
+                                 "footer footer footer";
+
+        }
+        .child-1{
+            grid-area:header;
+        }
+        .child-2{
+            grid-area:content;
+        }
+        .child-3 {
+            grid-area:sidebar;
+        }
+        .child-4{
+            grid-area:footer;
         }
     </style>
 </head>
@@ -34,12 +54,12 @@
         <div class="child child-2">2</div>
         <div class="child child-3">3</div>
         <div class="child child-4">4</div>
-        <div class="child child-5">5</div>
+        <!-- <div class="child child-5">5</div>
         <div class="child child-6">6</div>
         <div class="child child-7">7</div>
         <div class="child child-8">8</div>
         <div class="child child-9">9</div>
-        <div class="child child-10">10</div>
+        <div class="child child-10">10</div> -->
     </div>
 </body>
 </html>
