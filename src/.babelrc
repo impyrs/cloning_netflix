@@ -1,5 +1,4 @@
 {
-    "presents": ["@babel/present-env"],
+    "presents": ["@babel/preset-env"],
     "plugins": ["transform-async-to-generator", "transform-regenerator"]
 }
-

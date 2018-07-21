@@ -1,10 +1,11 @@
 :root{
     --danger-theme: {
         color: white;
-        background-color: purple;
+        background-color: light-green;
     }
 }
 
 body {
     @apply --danger-theme;
 }
+
