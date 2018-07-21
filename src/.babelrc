@@ -1,0 +1,5 @@
+{
+    "presents": ["@babel/present-env"],
+    "plugins": ["transform-async-to-generator", "transform-regenerator"]
+}
+
