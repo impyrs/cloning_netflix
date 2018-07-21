@@ -4,15 +4,15 @@ const UglifyJsPlugin = require("uglifyjs-webpack-plugin")
 
 module.exports = {
     entry: "./index.js",
-    module:{
-        rules: [
-
-        ]
+    devServer : {
+        contentBase: path.join(__dirname, "src"),
+        publicPath : "/",
+        progress: true,
+        port: 8080
     },
     output : {
         path: path.join(__dirname, "out"),
-        filename: "potato.js"
+        filename: "bundle.js"
     },
-    plugins: [new UglifyJsPlugin()]
 
 };
