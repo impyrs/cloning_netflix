@@ -8,12 +8,6 @@ app.innerHTML=`
 <div class="js-uncompleted">
     <h2>Uncompledted</h2>
     <ul>
-        <li>
-            <input type="checkbox">
-            <label>Go to the gym</label>
-            <button>delete</button>
-            <button>edit</button>
-        </li>
     </ul>
 </div>
 
@@ -27,6 +21,41 @@ app.innerHTML=`
 const form = document.querySelector(".js-form");
 const input = form.querySelector("input[type='text']");
 const uncompleteList = document.querySelector('.js-uncompleted ul');
+const completeList = document.querySelector('.js-completed ul');
+
+const completeToDo = event => {
+    const button = event.target;
+    const listItem = button.parentElement;
+    const parentList = listItem.parentElement;
+    parentList.removeChild(listItem);
+
+    completeList.prepend(listItem);
+    addEvents(listItem, uncompleteToDo);
+};
+
+const uncompleteToDo = event => {
+    const button = event.target;
+    const listItem = button.parentElement;
+    const parentList = listItem.parentElement;
+    parentList.removeChild(listItem);
+
+    uncompleteList.prepend(listItem);
+    addEvents(listItem, completeToDo);
+};
+
+const deleteToDo = event => {
+    const button = event.target;
+    const listItem = button.parentElement;
+    const parentList = listItem.parentElement;
+    parentList.removeChild(listItem);
+};
+
+const editTodo = event => {
+    console.log("edit");
+};
+
+
+
 
 const createListItem = (text) => {
     const listItem = document.createElement("li");
@@ -35,11 +64,17 @@ const createListItem = (text) => {
     const editBtn = document.createElement("button");
     const deleteBtn = document.createElement("button");
 
-    label.innerHTML = text;
-    
+    editBtn.classList.add("js-edit");
+    deleteBtn.classList.add("js-delete");
+
+    label.innerHTML = text;    
     input.type = "checkbox";
     editBtn.innerHTML = "Edit";
     deleteBtn.innerHTML = "Del"
+
+    // Why?
+    input.name = "check";
+    label.htmlFor = "check";
 
     listItem.appendChild(input);
     listItem.appendChild(label);
@@ -57,20 +92,14 @@ const handleFormSubmit = (event) => {
     input.value = "";
 };
 
-const compleToDo = event => {
-    console.log("complete");
-};
 
-const deleteToDo = event => {
-    console.log("delete");
-}
+const addEvents = (listItem, checkboxFn) => { // checkboxFn은 어떤 상황에서 check 하느냐에 따라 다르다.
+    const editBtn = listItem.querySelector("button.js-edit");
+    const deleteBtn = listItem.querySelector("button.js-delete");
+    const checkBox = listItem.querySelector("input[type='checkbox']");
 
-const editTodo = event => {
-    console.log("edit");
-}
-
-const addEvents = (listItem, checkboxFn) => {
-
+    editBtn.onclick = editTodo;
+    deleteBtn.onclick = deleteToDo;
     checkBox.onclick = checkboxFn; // Attaching Event to CheckBox
 };
 
