@@ -1,3 +1,6 @@
+import './styles.css'; // ES6에서는 이런식으로 css파일을 import 해주어야 한다.
+// 현재 경로도 . 으로 반드시 표시해 주어야 한다. styles.css라고 하면 에러 발생한다.
+
 const app = document.getElementById("js-app");
 app.innerHTML=`
 <h1>To Do App</h1>
@@ -27,8 +30,9 @@ const completeToDo = event => {
     const button = event.target;
     const listItem = button.parentElement;
     const parentList = listItem.parentElement;
-    parentList.removeChild(listItem);
-
+    
+    listItem.classList.add("completed"); // css를 위함
+    parentList.removeChild(listItem);    
     completeList.prepend(listItem);
     addEvents(listItem, uncompleteToDo);
 };
@@ -37,8 +41,9 @@ const uncompleteToDo = event => {
     const button = event.target;
     const listItem = button.parentElement;
     const parentList = listItem.parentElement;
-    parentList.removeChild(listItem);
 
+    listItem.classList.remove("completed"); // css를 위함
+    parentList.removeChild(listItem);
     uncompleteList.prepend(listItem);
     addEvents(listItem, completeToDo);
 };
@@ -51,10 +56,17 @@ const deleteToDo = event => {
 };
 
 const editTodo = event => {
-    console.log("edit");
+    const listItem = event.target.parentElement;
+    const label = listItem.querySelector("label");
+    const newValue = prompt("Edit To Do", label.innerHTML);
+    // 새로운 입력 값이 비어 있으면 바로 끝낸다.
+    if(newValue == "")
+    {
+        alert("Can't input empty value");
+        return;
+    }
+    label.innerHTML = newValue;
 };
-
-
 
 
 const createListItem = (text) => {
@@ -72,7 +84,7 @@ const createListItem = (text) => {
     editBtn.innerHTML = "Edit";
     deleteBtn.innerHTML = "Del"
 
-    // Why?
+    // Why? 왜 필요한지 잘 모르겠음.
     input.name = "check";
     label.htmlFor = "check";
 
@@ -86,6 +98,11 @@ const createListItem = (text) => {
 
 const handleFormSubmit = (event) => {
     event.preventDefault();
+    // 비어 있는 입력은 받으면 함수를 끝내버린다..
+    if(input.value == ""){
+        alert("Can't input empty value");
+        return;
+    }
     const task = createListItem(input.value);
     uncompleteList.prepend(task);
     addEvents(task, completeToDo);

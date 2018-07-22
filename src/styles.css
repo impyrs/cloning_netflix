@@ -1,11 +1,4 @@
-:root{
-    --danger-theme: {
-        color: white;
-        background-color: light-green;
-    }
+.completed {    
+    color: darkgrey;
+    text-decoration: line-through;
 }
-
-body {
-    @apply --danger-theme;
-}
-
