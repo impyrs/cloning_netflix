@@ -8,14 +8,14 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.jss/,
+                test: /\.js$/,
                 exclude: /(node_modules)/,
                 use: {
                     loader: "babel-loader"
                 }
             },
             {
-                test: /\.css/,
+                test: /\.css$/,
                 use: [
                     {
                         loader: "style-loader"
@@ -46,7 +46,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: path.join(__dirname, "src/index.html"),
+            template: path.join(__dirname, "index.html"),
             filename: "index.html"
         }),
     ]
